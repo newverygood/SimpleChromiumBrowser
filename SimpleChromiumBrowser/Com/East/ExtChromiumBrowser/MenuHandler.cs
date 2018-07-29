@@ -16,6 +16,7 @@ namespace SimpleChromiumBrowser.Com.East.ExtChromiumBrowser
         public void OnBeforeContextMenu(IWebBrowser browserControl, IBrowser browser, IFrame frame, IContextMenuParams parameters, IMenuModel model)
         {
             model.Clear();
+            model.AddItem(CefMenuCommand.Reload, "刷新");
             model.AddItem(CefMenuCommand.Copy, "复制");
             model.AddItem(CefMenuCommand.Paste, "粘贴");
             model.AddItem(CefMenuCommand.Print, "打印");
@@ -36,8 +37,11 @@ namespace SimpleChromiumBrowser.Com.East.ExtChromiumBrowser
                 case CefMenuCommand.Print://打印
                     browser.Print();
                     break;
-                case CefMenuCommand.ViewSource:
+                case CefMenuCommand.ViewSource://查看源码
                     frame.ViewSource();
+                    break;
+                case CefMenuCommand.Reload://刷新
+                    browser.Reload();
                     break;
             }
 

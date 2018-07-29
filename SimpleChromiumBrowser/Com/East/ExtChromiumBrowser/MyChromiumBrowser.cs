@@ -21,6 +21,8 @@ namespace SimpleChromiumBrowser.Com.East.ExtChromiumBrowser
         private static Form mainWindow;//承载浏览器的窗体类，必须设置
         private static Panel mainWindowPanel;//承载浏览器的容器
 
+        private ICookieManager cookieManager;
+
         //static MyChromiumBrowser() { }
         private MyChromiumBrowser()
         {
@@ -61,10 +63,13 @@ namespace SimpleChromiumBrowser.Com.East.ExtChromiumBrowser
             bset.Plugins = CefState.Enabled;//启用插件
             bset.WebSecurity = CefState.Disabled;//禁用跨域限制
             webBrowser.BrowserSettings = bset;
+            //设置cookieManager管理器
+            cookieManager = Cef.GetGlobalCookieManager();
+
 
             //webBrowser.DownloadHandler = new DownloadHandler();
             //webBrowser.KeyboardHandler = new KeyBoardHandler();
-            
+
             //MenuHandler.mainWindow = mainWindow;
             //webBrowser.MenuHandler = new MenuHandler();
 
@@ -103,6 +108,38 @@ namespace SimpleChromiumBrowser.Com.East.ExtChromiumBrowser
             return instance;
         }
 
+        /// <summary>
+        /// 删除cookies
+        /// </summary>
+        public void DeleteCookies()
+        {
+            cookieManager.DeleteCookiesAsync();
+        }
+
+        /// <summary>
+        /// 刷新
+        /// </summary>
+        public void Reload()
+        {
+            webBrowser.Reload();
+        }
+
+        /// <summary>
+        /// 显示开发者工具
+        /// </summary>
+        public void ShowDevTools()
+        {
+            webBrowser.ShowDevTools();
+        }
+
+        /// <summary>
+        /// 查看源码
+        /// </summary>
+        public void ShowViewSource()
+        {
+            webBrowser.ViewSource();
+        }
+
         private static void WebBrowser_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F12)
@@ -115,8 +152,8 @@ namespace SimpleChromiumBrowser.Com.East.ExtChromiumBrowser
         private static void Panel_SizeChanged(object sender, EventArgs e)
         {
             mainWindowPanel.Width = mainWindow.Width;
-            mainWindowPanel.Height = mainWindow.Height-35;
-            mainWindowPanel.Top = -5;
+            mainWindowPanel.Height = mainWindow.Height-55;
+            mainWindowPanel.Top = 15;
             mainWindowPanel.Left = 0;
         }
 

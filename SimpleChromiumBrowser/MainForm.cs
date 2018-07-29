@@ -27,8 +27,29 @@ namespace SimpleChromiumBrowser
         {
             myBrowser = MyChromiumBrowser.Instance(this);
 
-            myBrowser.Navigate("http://www.baidu.com");
+            //myBrowser.Navigate("http://www.baidu.com");
+            myBrowser.Navigate("http://www.eyijiao.com");
 
+        }
+
+        private void 刷新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            myBrowser.Reload();
+        }
+
+        private void 清除cookieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            myBrowser.DeleteCookies();
+        }
+
+        private void 开发者工具ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            myBrowser.ShowDevTools();
+        }
+
+        private void 查看源码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            myBrowser.ShowViewSource();
         }
     }
 }
